@@ -1,97 +1,58 @@
-import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-function App() {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [passwordError, setpasswordError] = useState("");
-  const [emailError, setemailError] = useState("");
-
-  const handleValidation = (event) => {
-    let formIsValid = true;
-
-    if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
-      formIsValid = false;
-      setemailError("Email Not Valid");
-      return false;
-    } else {
-      setemailError("");
-      formIsValid = true;
-    }
-
-    if (!password.match(/^[a-zA-Z]{6,12}$/)) {
-      formIsValid = false;
-      setpasswordError(
-        "Only Letters and length must best min 6 Characters and Max 12 Chracters"
-      );
-      return false;
-    } else {
-      setpasswordError("");
-      formIsValid = true;
-    }
-
-    return formIsValid;
-  };
-
-  const loginSubmit = (e) => {
-    e.preventDefault();
-    handleValidation();
-  };
-
+import './App.css';
+import email from "./assets/email.jpg";
+import pass from "./assets/pass.jpg";
+import google from "./assets/google.png";
+import facebook from "./assets/facebook.png";
+function LoginUi() {
   return (
-    <div className="App">
-      <div className="container ">
-        <div className="row d-flex justify-content-center">
-          <div className="col-md-4 mt-5">
-            <form id="loginform" onSubmit={loginSubmit}>
-              <div className="form-group  ">
-                <label>Email address</label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="EmailInput"
-                  name="EmailInput"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter email"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-                <small id="emailHelp" className="text-danger form-text">
-                  {emailError}
-                </small>
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="Password"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <small id="passworderror" className="text-danger form-text">
-                  {passwordError}
-                </small>
-              </div>
-              <div className="form-group form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label className="form-check-label mt-1">Remember Me</label>
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </form>
+    <div className="main">
+     <div className="sub-main">
+     <div>
+         <div className="imgs">
+           
+    
+
+         </div>
+         <div>
+           <h2>Login to your account</h2>
+            <span className=''>Continue with</span>
+           <div className="continue-with">
+            <a href="#">
+            <img src={google} alt="google" className='icon' />
+             </a>
+            <a href="#">
+              <img src={facebook} alt="facebook" className='icon' />
+             </a>
+           </div> 
+
+           <span>-----------Or-----------</span>
+           <form>
+           <div>
+             <img src={email} alt="email" className="email"/>
+             <input type="email" placeholder="email" className="name"/>
+           </div>
+           <div className="second-input">
+             <img src={pass} alt="pass" className="email"/>
+             <input type="password" placeholder="password" className="name"/>
+           </div>
+          <div className="login-button">
+          <button type='submit' >Log in</button>
           </div>
-         
-        </div>
-      </div>
+           </form>
+            <p className="link">
+              <a href="#">Forgot password ?</a> <br></br>
+              <br></br>
+              New user?<a href="#">Sign up</a>
+            </p>
+           
+ 
+         </div>
+       </div>
+       
+
+     </div>
     </div>
   );
 }
 
-
 export default LoginUi;
-// This is testing file

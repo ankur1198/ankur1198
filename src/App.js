@@ -1,49 +1,97 @@
-import './App.css';
-import profile from "./a.png";
-import email from "./email.jpg";
-import pass from "./pass.jpg";
-function LoginUi() {
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+function App() {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [passwordError, setpasswordError] = useState("");
+  const [emailError, setemailError] = useState("");
+
+  const handleValidation = (event) => {
+    let formIsValid = true;
+
+    if (!email.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+      formIsValid = false;
+      setemailError("Email Not Valid");
+      return false;
+    } else {
+      setemailError("");
+      formIsValid = true;
+    }
+
+    if (!password.match(/^[a-zA-Z]{6,12}$/)) {
+      formIsValid = false;
+      setpasswordError(
+        "Only Letters and length must best min 6 Characters and Max 12 Chracters"
+      );
+      return false;
+    } else {
+      setpasswordError("");
+      formIsValid = true;
+    }
+
+    return formIsValid;
+  };
+
+  const loginSubmit = (e) => {
+    e.preventDefault();
+    handleValidation();
+  };
+
   return (
-    <div className="main">
-     <div className="sub-main">
-       <div>
-         <div className="imgs">
-           <div className="container-image">
-             <img src={profile} alt="profile" className="profile"/>
-
-           </div>
-
-
-         </div>
-         <div>
-           <h2>Login to your account</h2>
-           <div>
-             <img src={email} alt="email" className="email"/>
-             <input type="text" placeholder="user name/ email" className="name"/>
-           </div>
-           <div className="second-input">
-             <img src={pass} alt="pass" className="email"/>
-             <input type="password" placeholder="password" className="name"/>
-           </div>
-          <div className="login-button">
-          <button>Log in</button>
+    <div className="App">
+      <div className="container ">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-4 mt-5">
+            <form id="loginform" onSubmit={loginSubmit}>
+              <div className="form-group  ">
+                <label>Email address</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="EmailInput"
+                  name="EmailInput"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+                <small id="emailHelp" className="text-danger form-text">
+                  {emailError}
+                </small>
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="Password"
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                <small id="passworderror" className="text-danger form-text">
+                  {passwordError}
+                </small>
+              </div>
+              <div className="form-group form-check">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id="exampleCheck1"
+                />
+                <label className="form-check-label mt-1">Remember Me</label>
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </form>
           </div>
-           
-            <p className="link">
-              <a href="#">Forgot password ?</a> <br></br>
-              <br></br>
-              New user?<a href="#">Sign up</a>
-            </p>
-           
- 
-         </div>
-       </div>
-       
-
-     </div>
+         
+        </div>
+      </div>
     </div>
   );
 }
+
 
 export default LoginUi;
 // This is testing file
